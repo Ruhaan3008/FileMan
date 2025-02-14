@@ -18,6 +18,16 @@ int main(){
 }
 ```
 
+If you want to run a test to see if everything is working fine, then you can try the following command in the shell:
+```sh
+cd Tests
+
+make clean
+
+make
+make run
+```
+
 <a id = "doc"> </a>
 
 ## Documentation

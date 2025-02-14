@@ -34,7 +34,7 @@ namespace FileMan{
         if (!std::filesystem::exists(t_FilePath)){
             return false;
         }
-        std::fstream file;
+        std::ofstream file;
         file.open(t_FilePath);
         if (!file.good()){
             file.close();

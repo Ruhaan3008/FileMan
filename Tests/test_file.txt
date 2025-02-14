@@ -1,1 +1,1 @@
-Crap I overwrote the fileCrap I wrote to the file
+This was a overwrite test.This was a write test.
