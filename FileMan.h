@@ -69,6 +69,18 @@ namespace FileMan{
 
     }
 
+    static inline bool Exists(std::string t_FilePath){
+        return std::filesystem::exists(t_FilePath);
+    }
+
+    static inline bool NewFile(std::string t_FileName){
+        std::ofstream file;
+        file.open(t_FileName);
+        file.close();
+
+        return std::filesystem::exists(t_FileName);
+    }
+
 }
 
 

@@ -24,6 +24,7 @@ $(TARGET): $(OBJS)
 clean:
 	del $(TARGET)
 	del $(OBJS)
+	del test_file.txt
 
 run:
 	.\$(TARGET)
