@@ -1,6 +1,6 @@
 # Compiler and flags
 CXX = g++
-CXXFLAGS = -Wall -std=c++17 -O2
+CXXFLAGS = -Wall -std=c++17 -O -pedantic
 
 # Source files
 SRCS = test.cpp
