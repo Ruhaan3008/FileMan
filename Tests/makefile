@@ -26,5 +26,9 @@ clean:
 	del $(OBJS)
 	del test_file.txt
 
+re:
+	make clean
+	make
+
 run:
 	.\$(TARGET)

@@ -10,6 +10,75 @@
 
 namespace FileMan{
     
+    class File{
+    public:
+        std::string filePath;
+
+        inline File()
+            :filePath(""),
+            m_file(), m_readFile()
+        {}
+        inline File(std::string t_FilePath)
+            : filePath(t_FilePath),
+            m_file(t_FilePath, std::ios::app),
+            m_readFile(t_FilePath, std::ios::app)
+        {}
+
+        inline ~File(){
+            m_file.close();
+            m_readFile.close();
+        }
+
+        inline bool Open(){
+            m_file.open(filePath, std::ios::app);
+            m_readFile.open(filePath, std::ios::app);
+            return m_file.good();
+        }
+
+        inline bool Open(std::string t_FilePath){
+            filePath = t_FilePath;
+
+            m_file.open(filePath, std::ios::app);
+            m_readFile.open(filePath, std::ios::app);
+
+            return m_file.good() && m_readFile.good();
+        }
+
+        inline bool IsOpen(){
+            return m_file.is_open() && m_readFile.is_open();
+        }
+
+        inline std::optional<std::stringstream> Read(){
+            if (!this->IsOpen()){
+                return {};
+            }
+            std::stringstream contents;
+
+            contents << m_readFile.rdbuf();
+    
+            return contents;
+        }
+
+        inline bool Write(std::string t_Content){
+            if (!this->IsOpen()){
+                return false;
+            }
+            m_file << t_Content;
+            m_file.flush();
+            return true;
+        }
+
+        inline void Close(){
+            m_file.close();
+            m_readFile.close();
+        }
+
+    private:
+        std::fstream m_file;
+        std::ifstream m_readFile;
+
+    };
+
     static inline std::optional<std::stringstream> ReadFile(std::string t_FilePath){
         if (!std::filesystem::exists(t_FilePath)){
             return {};
@@ -26,8 +95,6 @@ namespace FileMan{
         file.close();
 
         return contents;
-
-
     }
 
     static inline bool OverwriteFile(std::string t_FilePath, std::string t_Content){
@@ -46,7 +113,6 @@ namespace FileMan{
         file.close();
 
         return true;
-
     }
 
     static inline bool WriteToFile(std::string t_FilePath, std::string t_Content){
