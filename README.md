@@ -34,7 +34,7 @@ make run
 ### Static functions:
 1. [ReadFile](#reading-files)
 2. [OverwriteFile](#overwriting-file-contents)
-3. [ClearFile]
+3. [ClearFile](#clearing-the-file-contents)
 4. [WriteToFile](#write-to-file)
 5. [Exists](#check-if-file-exists)
 6. [NewFile](#create-a-new-file)
