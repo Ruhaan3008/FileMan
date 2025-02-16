@@ -34,9 +34,10 @@ make run
 ### Static functions:
 1. [ReadFile](#reading-files)
 2. [OverwriteFile](#overwriting-file-contents)
-3. [WriteToFile](#write-to-file)
-4. [Exists](#check-if-file-exists)
-5. [NewFile](#create-a-new-file)
+3. [ClearFile]
+4. [WriteToFile](#write-to-file)
+5. [Exists](#check-if-file-exists)
+6. [NewFile](#create-a-new-file)
 
 
 #### Reading Files:
@@ -47,13 +48,19 @@ Read the contents of the file. Return a an optional string stream. The optional 
 
 #### Overwriting File Contents:
 ```c++
-static bool std::cout << FileMan::OverwriteFile("FilePath.txt", "replace text");
+static bool FileMan::OverwriteFile("FilePath.txt", "replace text");
 ```
 Overwrites the pre-existing data. Returns true if the overwrite was successful. If the file does not exist, the function return false.
 
+#### Clearing the file contents
+```c++
+static bool FileMan::ClearFile("FilePath.txt");
+```
+Clears the contents of the file. Return true if the operation was successful. 
+
 #### Write to File:
 ```c++
-static bool std::cout << FileMan::WriteToFile("FilePath.txt", "replace text");
+static bool FileMan::WriteToFile("FilePath.txt", "replace text");
 ```
 Appends to data to the end of the file. Returns true if the write was successful. If the file does not exist, the function return false.
 
@@ -81,6 +88,7 @@ Public Functions and Variable;
 - filePath
 - [Open()](#opening-a-file)
 - [IsOpen()](#opening-a-file)
+- [Clear()](#clearing-file-contents)
 - [Read()](#reading-the-file-contents)
 - [Write()](#writing-to-the-file)
 - [Close()](#closing-the-file)
@@ -101,6 +109,13 @@ To check if the file is open you can do the following:
 FileMan::File file("filePath.txt");
 std::cout << file.IsOpen() ? "File is open" : "File is not open";
 ```
+#### Clearing File Contents:
+Clearing the file contents can be done like this:
+```c++
+FileMan::File file("filePath.txt");
+file.Clear();
+```
+All the file contents will be cleared and will return true if the file was successfully cleared.
 
 #### Reading the File Contents:
 ```c++

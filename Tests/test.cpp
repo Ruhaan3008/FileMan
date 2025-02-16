@@ -19,5 +19,8 @@ int main(){
     file.Write(" This is a file class write test.");
     std::cout << file.Read().value().str();
 
+    file.Clear();
+    file.Write("All the test have been succesfuly ");
+
     return 0;
 }

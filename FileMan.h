@@ -68,6 +68,17 @@ namespace FileMan{
             return true;
         }
 
+        inline bool Clear(){
+            this->Close();
+
+            std::ofstream clearFile(filePath);
+            clearFile.close();
+
+            this->Open();
+
+            return this->IsOpen();            
+        }
+
         inline void Close(){
             m_file.close();
             m_readFile.close();
@@ -110,6 +121,22 @@ namespace FileMan{
 
         file << t_Content;
 
+        file.close();
+
+        return true;
+    }
+    
+    static inline bool ClearFile(std::string t_FilePath){
+        if (!std::filesystem::exists(t_FilePath)){
+            return false;
+        }
+        std::ofstream file;
+        file.open(t_FilePath);
+        if (!file.good()){
+            file.close();
+            return false;
+        }
+        
         file.close();
 
         return true;
