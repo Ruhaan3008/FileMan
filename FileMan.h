@@ -167,7 +167,7 @@ namespace FileMan{
     }
 
     static inline bool DeleteFile(std::string t_FilePath){
-        if (std::filesystem::exists(t_FilePath)){
+        if (!std::filesystem::exists(t_FilePath)){
             return true;
         }
         std::filesystem::remove(t_FilePath);
@@ -191,9 +191,12 @@ namespace FileMan{
             return false;
         }
 
-        std::ofstream file;
-        file.open(newPath);
-        file.close();
+        std::filesystem::create_directories(newPath);
+        
+        std::filesystem::path pathObj(oldPath);
+        std::string fileName = pathObj.filename().string();
+
+        newPath += fileName;
 
         std::filesystem::copy_file(oldPath, newPath);
         

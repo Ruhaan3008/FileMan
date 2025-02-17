@@ -27,6 +27,7 @@ int main(){
     FileMan::DeleteFile("del_test.txt");
 
     std::cout << '\n' << FileMan::RenameFile("test_file.txt", "t.txt");
+    FileMan::MoveFile("t.txt", "success/");
 
     return 0;
 }
