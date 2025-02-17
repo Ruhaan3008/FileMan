@@ -206,6 +206,27 @@ namespace FileMan{
 
     }
 
+    static inline bool CopyFile(std::string oldPath, std::string newPath){
+        if (std::filesystem::exists(newPath)){
+            return false;
+        }
+        if (!std::filesystem::exists(oldPath)){
+            return false;
+        }
+        
+        std::filesystem::path pathObj(oldPath);
+        std::string newFilePath = pathObj.remove_filename().string();
+
+        std::filesystem::create_directories(newFilePath);
+
+        std::filesystem::copy_file(oldPath, newPath);
+        
+        std::filesystem::remove(oldPath);
+        
+        return true;
+
+    }
+
     //return in bytes
     static inline unsigned long long  GetSize(std::string t_FilePath){
         return std::filesystem::file_size(t_FilePath);
