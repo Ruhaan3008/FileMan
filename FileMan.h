@@ -219,9 +219,8 @@ namespace FileMan{
 
         std::filesystem::create_directories(newFilePath);
 
+        std::filesystem::remove(newPath);
         std::filesystem::copy_file(oldPath, newPath);
-        
-        std::filesystem::remove(oldPath);
         
         return true;
 

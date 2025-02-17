@@ -29,5 +29,8 @@ int main(){
     std::cout << '\n' << FileMan::RenameFile("test_file.txt", "t.txt");
     FileMan::MoveFile("t.txt", "success/");
 
+    FileMan::NewFile("copyTest.txt");
+    FileMan::CopyFile("success/t.txt", "copyTest.txt");
+
     return 0;
 }
