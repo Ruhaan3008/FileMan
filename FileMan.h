@@ -167,6 +167,9 @@ namespace FileMan{
     }
 
     static inline bool DeleteFile(std::string t_FilePath){
+        if (std::filesystem::exists(t_FilePath)){
+            return true;
+        }
         std::filesystem::remove(t_FilePath);
 
         return !std::filesystem::exists(t_FilePath);
@@ -180,9 +183,40 @@ namespace FileMan{
         return std::filesystem::exists(t_FileName);
     }
 
+    static inline bool MoveFile(std::string oldPath, std::string newPath){
+        if (std::filesystem::exists(newPath)){
+            return false;
+        }
+        if (!std::filesystem::exists(oldPath)){
+            return false;
+        }
+
+        std::ofstream file;
+        file.open(newPath);
+        file.close();
+
+        std::filesystem::copy_file(oldPath, newPath);
+        
+        std::filesystem::remove(oldPath);
+        
+        return true;
+
+    }
+
     //return in bytes
     static inline unsigned long long  GetSize(std::string t_FilePath){
         return std::filesystem::file_size(t_FilePath);
+    }
+
+    static inline bool RenameFile(std::string OldPath, std::string NewPath){
+        if (!std::filesystem::exists(OldPath)){
+            return false;
+        }
+
+        std::filesystem::rename(OldPath, NewPath);
+
+
+        return !(std::filesystem::exists(OldPath)) && std::filesystem::exists(NewPath);
     }
 
 }
