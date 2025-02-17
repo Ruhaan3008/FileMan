@@ -3,6 +3,7 @@
 
 int main(){
     FileMan::NewFile("test_file.txt");
+    std::cout << FileMan::GetFileExtension("test_file.txt") << '\n';
 
     if (!FileMan::Exists("test_file.txt")){
         std::cout << "File creation failed.";

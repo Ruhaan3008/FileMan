@@ -231,6 +231,11 @@ namespace FileMan{
         return std::filesystem::file_size(t_FilePath);
     }
 
+    static inline std::string GetFileExtension(std::string t_FilePath){
+        std::filesystem::path pathObj(t_FilePath);
+        return pathObj.extension().string();
+    }
+
     static inline bool RenameFile(std::string OldPath, std::string NewPath){
         if (!std::filesystem::exists(OldPath)){
             return false;
