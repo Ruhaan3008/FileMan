@@ -25,5 +25,7 @@ int main(){
 
     FileMan::DeleteFile("del_test.txt");
 
+    std::cout << '\n' << FileMan::GetSize("test_file.txt");
+
     return 0;
 }

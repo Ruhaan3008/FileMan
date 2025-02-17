@@ -180,6 +180,11 @@ namespace FileMan{
         return std::filesystem::exists(t_FileName);
     }
 
+    //return in bytes
+    static inline unsigned long long  GetSize(std::string t_FilePath){
+        return std::filesystem::file_size(t_FilePath);
+    }
+
 }
 
 
