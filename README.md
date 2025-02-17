@@ -38,6 +38,7 @@ make run
 4. [WriteToFile](#write-to-file)
 5. [Exists](#check-if-file-exists)
 6. [GetSize](#check-file-size)
+6. [GetFileExtention](#getting-file-extention)
 7. [NewFile](#create-a-new-file)
 8. [DeleteFile](#delete-a-file)
 9. [MoveFile](#Moving-a-file)
@@ -79,6 +80,12 @@ Reuturns true if the file exists.
 static unsigned long long  FileMan::GetSize("FilePath.txt");
 ```
 Returns the file size in bytes.
+
+#### Getting file extention:
+```c++
+static std::string  FileMan::GetFileExtention("FilePath.txt");
+```
+The file path does not have to exist for this function to work. Returns the file extention.
 
 #### Create a new file:
 ```c++
