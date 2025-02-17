@@ -207,7 +207,7 @@ namespace FileMan{
     }
 
     static inline bool CopyFile(std::string oldPath, std::string newPath){
-        if (std::filesystem::exists(newPath)){
+        if (!std::filesystem::exists(newPath)){
             return false;
         }
         if (!std::filesystem::exists(oldPath)){

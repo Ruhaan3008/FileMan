@@ -95,7 +95,7 @@ Returns true if the file does not exist after the delete operation.
 ```c++
 static bool FileMan::MoveFile("oldFile.txt", "NewPath");
 ```
-The first parameter is the name of the file you want to move. The Second parameter is the new path (not the file name) you want to move it to. Only works if there is no file with the same name as the file you want move. Returns true if the operation was successful.
+The first parameter is the name of the file you want to move. The Second parameter is the new path (not the file name) you want to move it to. Only works if there is no file with the same name in the new directory as the file you want move. Returns true if the operation was successful.
 
 ## Classes
 
