@@ -24,8 +24,7 @@ $(TARGET): $(OBJS)
 clean:
 	del $(TARGET)
 	del $(OBJS)
-	del test_file.txt
-	del del_test.txt
+	del *.txt
 
 re:
 	make clean

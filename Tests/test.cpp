@@ -22,10 +22,11 @@ int main(){
 
     file.Clear();
     file.Write("All the test have been successfully.");
+    file.Close();
 
     FileMan::DeleteFile("del_test.txt");
 
-    std::cout << '\n' << FileMan::GetSize("test_file.txt");
+    std::cout << '\n' << FileMan::RenameFile("test_file.txt", "t.txt");
 
     return 0;
 }
