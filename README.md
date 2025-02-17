@@ -40,6 +40,7 @@ make run
 6. [GetSize](#check-file-size)
 7. [NewFile](#create-a-new-file)
 8. [DeleteFile](#delete-a-file)
+9. [MoveFile](#Moving-a-file)
 
 
 #### Reading Files:
@@ -89,6 +90,12 @@ Creates a new file. Returns true if the creation was successful.
 static bool FileMan::DeleteFile("FilePath.txt");
 ```
 Returns true if the file does not exist after the delete operation.
+
+#### Moving a file:
+```c++
+static bool FileMan::MoveFile("oldFile.txt", "NewPath");
+```
+The first parameter is the name of the file you want to move. The Second parameter is the new path (not the file name) you want to move it to. Only works if there is no file with the same name as the file you want move. Returns true if the operation was successful.
 
 ## Classes
 
