@@ -37,7 +37,9 @@ make run
 3. [ClearFile](#clearing-the-file-contents)
 4. [WriteToFile](#write-to-file)
 5. [Exists](#check-if-file-exists)
-6. [NewFile](#create-a-new-file)
+6. [GetSize](#check-file-size)
+7. [NewFile](#create-a-new-file)
+8. [DeleteFile](#delete-a-file)
 
 
 #### Reading Files:
@@ -70,12 +72,23 @@ static bool FileMan::ReadFile("FilePath.txt");
 ```
 Reuturns true if the file exists.
 
+#### Check file size:
+```c++
+static unsigned long long  FileMan::GetSize("FilePath.txt");
+```
+Returns the file size in bytes.
+
 #### Create a new file:
 ```c++
 static bool FileMan::NewFile("FilePath.txt");
 ```
 Creates a new file. Returns true if the creation was successful. 
 
+#### Delete a file:
+```c++
+static bool FileMan::DeleteFile("FilePath.txt");
+```
+Returns true if the file does not exist after the delete operation.
 
 ## Classes
 
