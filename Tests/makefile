@@ -25,10 +25,12 @@ clean:
 	del $(TARGET)
 	del $(OBJS)
 	del test_file.txt
+	del del_test.txt
 
 re:
 	make clean
 	make
+	type nul > del_test.txt
 
 run:
 	.\$(TARGET)

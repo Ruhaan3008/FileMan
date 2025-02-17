@@ -23,5 +23,7 @@ int main(){
     file.Clear();
     file.Write("All the test have been successfully.");
 
+    FileMan::DeleteFile("del_test.txt");
+
     return 0;
 }

@@ -166,6 +166,12 @@ namespace FileMan{
         return std::filesystem::exists(t_FilePath);
     }
 
+    static inline bool DeleteFile(std::string t_FilePath){
+        std::filesystem::remove(t_FilePath);
+
+        return !std::filesystem::exists(t_FilePath);
+    }
+
     static inline bool NewFile(std::string t_FileName){
         std::ofstream file;
         file.open(t_FileName);
