@@ -4,8 +4,6 @@
 - [Documentation](#doc)
 - [Classes](#classes)
 
-<a id = "how-to-use"> </a>
-
 ## How to use
 Just downlad the FileMan.h header file and include to it in your code. No need for any additional dependencies.
 
