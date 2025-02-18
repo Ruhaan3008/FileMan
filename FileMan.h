@@ -30,12 +30,19 @@ namespace FileMan{
         }
 
         inline bool Open(){
+            if (!std::filesystem::exists(filePath)){
+                return false;
+            }
+            
             m_file.open(filePath, std::ios::app);
             m_readFile.open(filePath, std::ios::app);
             return m_file.good();
         }
 
         inline bool Open(std::string t_FilePath){
+            if (!std::filesystem::exists(filePath)){
+                return false;
+            }
             filePath = t_FilePath;
 
             m_file.open(filePath, std::ios::app);
@@ -45,10 +52,18 @@ namespace FileMan{
         }
 
         inline bool IsOpen(){
+            if (!std::filesystem::exists(filePath)){
+                return false;
+            }
+
             return m_file.is_open() && m_readFile.is_open();
         }
 
         inline std::optional<std::stringstream> Read(){
+
+            if (!std::filesystem::exists(filePath)){
+                return {};
+            }
             if (!this->IsOpen()){
                 return {};
             }
@@ -60,6 +75,10 @@ namespace FileMan{
         }
 
         inline bool Write(std::string t_Content){
+            if (!std::filesystem::exists(filePath)){
+                return false;
+            }
+            
             if (!this->IsOpen()){
                 return false;
             }
@@ -69,6 +88,10 @@ namespace FileMan{
         }
 
         inline bool Clear(){
+            if (!std::filesystem::exists(filePath)){
+                return false;
+            }
+
             this->Close();
 
             std::ofstream clearFile(filePath);
@@ -80,6 +103,10 @@ namespace FileMan{
         }
 
         inline void Close(){
+            if (!std::filesystem::exists(filePath)){
+                return;
+            }
+
             m_file.close();
             m_readFile.close();
         }
@@ -196,6 +223,10 @@ namespace FileMan{
         std::filesystem::path pathObj(oldPath);
         std::string fileName = pathObj.filename().string();
 
+        int len = newPath.length();
+        if (newPath.at(len-1) != '/'){
+            newPath += '/';
+        }
         newPath += fileName;
 
         std::filesystem::copy_file(oldPath, newPath);
@@ -228,6 +259,9 @@ namespace FileMan{
 
     //return in bytes
     static inline unsigned long long  GetSize(std::string t_FilePath){
+        if (!std::filesystem::exists(t_FilePath)){
+            return 0;
+        }
         return std::filesystem::file_size(t_FilePath);
     }
 
