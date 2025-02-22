@@ -41,6 +41,7 @@ make run
 8. [DeleteFile](#delete-a-file)
 9. [MoveFile](#Moving-a-file)
 10. [CopyFile](#copying-a-file)
+11. [CreateDirctory](#making-new-directory)
 
 
 #### Reading Files:
@@ -108,6 +109,12 @@ The first parameter is the name of the file you want to move. The Second paramet
 static bool FileMan::MoveFile("from.txt", "to.txt");
 ```
 Both files must exist and copys from "from.txt" to "to.txt". Returns true if the operation was successful.
+
+#### Making a new directory:
+```c++
+static bool FileMan::CreateDirectory("NewFolder");
+```
+Creates a new directory, if it does not exist. Returns true if the folder is created or already exists.
 
 ## Classes
 
