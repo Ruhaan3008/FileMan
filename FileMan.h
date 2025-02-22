@@ -281,6 +281,15 @@ namespace FileMan{
         return !(std::filesystem::exists(OldPath)) && std::filesystem::exists(NewPath);
     }
 
+    static inline bool CreateDirectory(std::string t_Driectory){
+        if (std::filesystem::exists(t_Driectory)){
+            return true;
+        }
+        std::filesystem::create_directory(t_Driectory);
+
+        return std::filesystem::exists(t_Driectory);
+    }
+
 }
 
 

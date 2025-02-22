@@ -28,7 +28,8 @@ int main(){
     FileMan::DeleteFile("del_test.txt");
 
     FileMan::RenameFile("test_file.txt", "t.txt");
-    FileMan::MoveFile("t.txt", "success/");
+    FileMan::CreateDirectory("success");
+    //FileMan::MoveFile("t.txt", "success/");
 
     FileMan::NewFile("copyTest.txt");
     FileMan::CopyFile("success/t.txt", "copyTest.txt");
