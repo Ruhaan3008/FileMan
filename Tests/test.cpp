@@ -1,38 +1,105 @@
 #include <iostream>
 #include "../FileMan.h"
 
-int main(){
-    FileMan::NewFile("test_file.txt");
-    std::cout << FileMan::GetFileExtension("test_file.txt") << '\n';
+std::string testFile = "test_file.txt";
+std::string moveDirectory = "move_dir"; 
 
-    if (!FileMan::Exists("test_file.txt")){
-        std::cout << "File creation failed.";
-        return 1;
+int main(){
+    {
+        // Creation test
+        std::cout<< "File Creation test" << '\n';
+
+        FileMan::NewFile(testFile);
+
+        std::string creationResult = FileMan::Exists(testFile) ? 
+        "Creation was successful" : "Creation failed";
+        std::cout <<creationResult << '\n';
+
+        if (!FileMan::Exists(testFile)){
+            exit(-1);
+        }
     }
 
-    FileMan::OverwriteFile("test_file.txt", "This was a overwrite test.");
-    FileMan::WriteToFile("test_file.txt", " This was a write test.");
-    std::cout << FileMan::ReadFile("test_file.txt").value().str() << std::endl;
-    FileMan::ClearFile("test_file.txt");
+    {
+        //read write overwrite test
+        std::cout << '\n';
+        std::cout<< "Read, Write and Overwrite Test" << '\n';
 
-    std::cout << "File Class test is now commencing..." << std::endl;
+        std::string writeContent = "Just a normal write.";
+        std::string overwriteContent = "Just an avg overwrite";
 
-    FileMan::File file("test_file.txt");
-    file.Write(" This is a file class write test.");
-    std::cout << file.Read().value().str();
+        FileMan::WriteToFile(testFile, writeContent);
 
-    file.Clear();
-    file.Write("All the test have been successfully.");
-    file.Close();
+        std::string writeResult = FileMan::ReadFile(testFile).has_value() ?
+        "Write Test was successful" : "Write Test failed";
+        std::cout<< writeResult << '\n';
 
-    FileMan::DeleteFile("del_test.txt");
+        std::string readResult = (FileMan::ReadFile(testFile).value().str() == writeContent)?
+        "Read Test was successful" : "Read Test failed";
+        std::cout<< readResult << '\n';
 
-    FileMan::RenameFile("test_file.txt", "t.txt");
-    FileMan::CreateDirectory("success");
-    //FileMan::MoveFile("t.txt", "success/");
+        FileMan::OverwriteFile(testFile, overwriteContent);
 
-    FileMan::NewFile("copyTest.txt");
-    FileMan::CopyFile("success/t.txt", "copyTest.txt");
+        std::string overwriteResult = (FileMan::ReadFile(testFile).value().str() == overwriteContent) ?
+        "Overwrite test was successful" : "Overwrite test failed";
+        std::cout<< overwriteResult << '\n';
+    }
 
+    {
+        //Clear test
+        std::cout << '\n';
+        std::cout << "File Clear Test" << '\n';
+
+        FileMan::ClearFile(testFile);
+        
+        std::string clearResult = (FileMan::ReadFile(testFile).value().str() == "") ?
+        "Clear test was successful" : "Clear Test failed";
+        std::cout << clearResult << '\n';
+    }
+
+    {
+        //File extention test
+        std::cout << '\n';
+        std::cout << "Get File Extention Test" << '\n';
+
+        std::string result = (FileMan::GetFileExtension(testFile) == ".txt")?
+        "File Extention test was successful" : "File Extention test failed";
+        std::cout <<  result << '\n';
+
+    }
+
+    {
+        //Create Directory
+        std::cout << '\n';
+        std::cout <<  "Directory Creation Test" << '\n';
+
+        FileMan::CreateDirectory(moveDirectory);
+
+        std::string result = FileMan::Exists(moveDirectory) ?
+        "Directory Creation was successful" : "Directory Creation failed";
+        std::cout << result << '\n';
+    }
+    {
+        std::cout << '\n';
+        std::cout <<  "Move Test" << '\n';
+
+        FileMan::MoveFile(testFile, moveDirectory + '/');
+
+        bool result = !FileMan::Exists(testFile) && FileMan::Exists(moveDirectory + '/' + testFile);
+        std::string resultString = result ?
+        "Move test was successful" : "Move test failed";
+        std::cout << resultString << '\n';
+
+    }
+
+    {
+        //Deletion test
+        std::cout << '\n';
+        std::cout << "File Deletion Test" << '\n';
+        FileMan::DeleteFile(testFile);
+        std::string deletionResult = !FileMan::Exists(testFile) ? 
+        "Deletion was successful" : "Deletion failed";
+        std::cout<< deletionResult << '\n';
+    }
     return 0;
 }

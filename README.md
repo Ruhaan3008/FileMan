@@ -39,9 +39,9 @@ make run
 6. [GetFileExtention](#getting-file-extention)
 7. [NewFile](#create-a-new-file)
 8. [DeleteFile](#delete-a-file)
-9. [MoveFile](#Moving-a-file)
+9. [MoveFile](#moving-a-file)
 10. [CopyFile](#copying-a-file)
-11. [CreateDirctory](#making-new-directory)
+11. [CreateDirectory](#making-new-directory)
 
 
 #### Reading Files:

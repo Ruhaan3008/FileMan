@@ -29,7 +29,6 @@ clean:
 re:
 	make clean
 	make
-	type nul > del_test.txt
 
 run:
 	.\$(TARGET)
