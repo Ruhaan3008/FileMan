@@ -2,7 +2,7 @@
 #include "../FileMan.h"
 
 std::string testFile = "test_file.txt";
-std::string moveDirectory = "move_dir"; 
+std::string moveDirectory = "move_dir/"; 
 
 int main(){
     {
@@ -80,6 +80,7 @@ int main(){
         std::cout << result << '\n';
     }
     {
+        //move test
         std::cout << '\n';
         std::cout <<  "Move Test" << '\n';
 
