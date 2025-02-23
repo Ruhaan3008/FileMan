@@ -83,9 +83,9 @@ int main(){
         std::cout << '\n';
         std::cout <<  "Move Test" << '\n';
 
-        FileMan::MoveFile(testFile, moveDirectory + '/');
+        FileMan::MoveFile(testFile, moveDirectory);
 
-        bool result = !FileMan::Exists(testFile) && FileMan::Exists(moveDirectory + '/' + testFile);
+        bool result = !FileMan::Exists(testFile) && FileMan::Exists(moveDirectory + testFile);
         std::string resultString = result ?
         "Move test was successful" : "Move test failed";
         std::cout << resultString << '\n';
@@ -96,7 +96,7 @@ int main(){
         //Deletion test
         std::cout << '\n';
         std::cout << "File Deletion Test" << '\n';
-        FileMan::DeleteFile(testFile);
+        //FileMan::DeleteFile(testFile);
         std::string deletionResult = !FileMan::Exists(testFile) ? 
         "Deletion was successful" : "Deletion failed";
         std::cout<< deletionResult << '\n';

@@ -87,6 +87,17 @@ namespace FileMan{
             return true;
         }
 
+        inline unsigned int LineCount(){
+            std::string line;
+            int lineCount = 0;
+
+            while (std::getline(m_file, line)){
+                lineCount++;
+            }
+
+            return lineCount;
+        }
+
         inline bool Clear(){
             if (!std::filesystem::exists(filePath)){
                 return false;
@@ -211,22 +222,22 @@ namespace FileMan{
     }
 
     static inline bool MoveFile(std::string oldPath, std::string newPath){
-        if (std::filesystem::exists(newPath)){
-            return false;
-        }
         if (!std::filesystem::exists(oldPath)){
             return false;
         }
-
-        std::filesystem::create_directories(newPath);
+        if (newPath.back() != '/'){
+            newPath += '/';
+        }
+        if (!std::filesystem::exists(newPath)){
+            std::filesystem::create_directories(newPath);
+        }
+        if (std::filesystem::exists(newPath+oldPath)){
+            return false;
+        }
         
         std::filesystem::path pathObj(oldPath);
         std::string fileName = pathObj.filename().string();
 
-        int len = newPath.length();
-        if (newPath.at(len-1) != '/'){
-            newPath += '/';
-        }
         newPath += fileName;
 
         std::filesystem::copy_file(oldPath, newPath);
