@@ -5,7 +5,8 @@ std::string testFile = "test_file.txt";
 std::string moveDirectory = "move_dir/"; 
 
 int main(){
-    bool allTests = true;
+    std::cout << "Commencing Static Function Tests" << '\n';
+    bool staticFuncTests = true;
     {
         // Creation test
         std::cout<< "File Creation test" << '\n';
@@ -19,7 +20,7 @@ int main(){
         if (!FileMan::Exists(testFile)){
             exit(-1);
         }
-        allTests = allTests && FileMan::Exists(testFile);
+        staticFuncTests = staticFuncTests && FileMan::Exists(testFile);
     }
 
     {
@@ -32,10 +33,12 @@ int main(){
 
         FileMan::WriteToFile(testFile, writeContent);
 
+        bool resWrtie = FileMan::ReadFile(testFile).has_value();
         std::string writeResult = FileMan::ReadFile(testFile).has_value() ?
         "Write Test was successful" : "Write Test failed";
         std::cout<< writeResult << '\n';
 
+        bool res1 = FileMan::ReadFile(testFile).value().str() == writeContent;
         std::string readResult = (FileMan::ReadFile(testFile).value().str() == writeContent)?
         "Read Test was successful" : "Read Test failed";
         std::cout<< readResult << '\n';
@@ -47,7 +50,9 @@ int main(){
         "Overwrite test was successful" : "Overwrite test failed";
         std::cout<< overwriteResult << '\n';
 
-        allTests = allTests && success;
+        success = success && res1 && resWrtie;
+
+        staticFuncTests = staticFuncTests && success;
     }
 
     {
@@ -61,7 +66,7 @@ int main(){
         "Clear test was successful" : "Clear Test failed";
         std::cout << clearResult << '\n';
 
-        allTests = allTests && FileMan::ReadFile(testFile).value().str() == "";
+        staticFuncTests = staticFuncTests && FileMan::ReadFile(testFile).value().str() == "";
     }
 
     {
@@ -73,7 +78,7 @@ int main(){
         "File Extention test was successful" : "File Extention test failed";
         std::cout <<  result << '\n';
 
-        allTests = allTests && FileMan::GetFileExtension(testFile) == ".txt";
+        staticFuncTests = staticFuncTests && FileMan::GetFileExtension(testFile) == ".txt";
 
     }
 
@@ -88,7 +93,7 @@ int main(){
         "Directory Creation was successful" : "Directory Creation failed";
         std::cout << result << '\n';
 
-        allTests = allTests &&  FileMan::Exists(moveDirectory);
+        staticFuncTests = staticFuncTests &&  FileMan::Exists(moveDirectory);
     }
     {
         //move test
@@ -106,7 +111,7 @@ int main(){
         "Move test was successful" : "Move test failed";
         std::cout << resultString << '\n';
 
-        allTests = allTests && result;
+        staticFuncTests = staticFuncTests && result;
     }
 
     {
@@ -122,7 +127,7 @@ int main(){
         "Copy test was successful" : "Copy test failed";
         std::cout << resultString << '\n';
 
-        allTests = allTests && result;
+        staticFuncTests = staticFuncTests && result;
     }
 
     {
@@ -136,7 +141,7 @@ int main(){
         "Directory Deletion test was successful" : "Directory Deletion failed";
         std::cout << resultString << '\n';
 
-        allTests = allTests && result;
+        staticFuncTests = staticFuncTests && result;
     }
 
     {
@@ -150,11 +155,80 @@ int main(){
         "Deletion was successful" : "Deletion failed";
         std::cout<< deletionResult << '\n';
 
-        allTests = allTests && !FileMan::Exists(testFile);
+        staticFuncTests = staticFuncTests && !FileMan::Exists(testFile);
     }
 
     std::cout << '\n';
-    std::cout << (allTests ? "All Tests were Successful" : "All Tests were not Successful");
+    std::cout << (staticFuncTests ? "All Static Function Tests were Successful" : "All Static Function Tests were not Successful");
+    std::cout << '\n';
+    std::cout << '\n';
+    
+    std::cout << "Commencing Class tests" << '\n';
+    bool classTests = true;
+
+    FileMan::NewFile(testFile);
+    
+    FileMan::File file(testFile);
+
+    {
+        std::cout << '\n';
+        std::cout << "Opening file: ";
+
+        std::string result = file.IsOpen() ?
+        "Success" : "Failed";
+        std::cout << result;
+
+        classTests = classTests && file.IsOpen();
+    }
+
+    {
+        std::cout << '\n';
+        std::cout << "Read and Write to file: ";
+
+        std::string writeContent = "Just some content";
+        file.Write(writeContent);
+
+        bool success = file.Read().value().str() == writeContent;
+        std::string result = success ?
+        "Success" : "Fail";
+        std::cout << result;
+
+        classTests = classTests && success;
+    }
+
+    {
+        std::cout << '\n';
+        std::cout << "Clear file: ";
+
+        file.Clear();
+
+        bool success = file.Read().value().str() == "";
+        std::string result = success ?
+        "Success" : "Fail";
+        std::cout << result;
+
+        classTests = classTests && success;
+    }
+
+    {
+        std::cout << '\n';
+        std::cout << "Closing file: ";
+
+        file.Close();
+
+        std::string result = !file.IsOpen() ?
+        "Success" : "Failed";
+        std::cout << result;
+
+        classTests = classTests && !file.IsOpen();
+    }
+
+    std::cout << '\n';
+    std::cout << '\n';
+    std::cout << (classTests ? "All Class Tests were Successful" : "All Class Tests were not Successful");
+
+    std::cout << '\n';
+    std::cout << (staticFuncTests && classTests ? "All Tests were Successful" : "All Tests were not Successful");
 
     return 0;
 }
