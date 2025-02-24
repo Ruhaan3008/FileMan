@@ -87,17 +87,6 @@ namespace FileMan{
             return true;
         }
 
-        inline unsigned int LineCount(){
-            std::string line;
-            int lineCount = 0;
-
-            while (std::getline(m_file, line)){
-                lineCount++;
-            }
-
-            return lineCount;
-        }
-
         inline bool Clear(){
             if (!std::filesystem::exists(filePath)){
                 return false;
