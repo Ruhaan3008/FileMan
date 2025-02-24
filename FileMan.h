@@ -301,6 +301,15 @@ namespace FileMan{
         return std::filesystem::exists(t_Driectory);
     }
 
+    static inline bool DeleteDirectory(std::string t_Directory){
+        if (!std::filesystem::exists(t_Directory)){
+            return true;
+        }
+        std::filesystem::remove_all(t_Directory);
+
+        return std::filesystem::exists(t_Directory);
+    }
+
 }
 
 
