@@ -42,6 +42,7 @@ make run
 9. [MoveFile](#moving-a-file)
 10. [CopyFile](#copying-a-file)
 11. [CreateDirectory](#making-new-directory)
+12. [DeleteDirectory](#deleting-directories)
 
 
 #### Reading Files:
@@ -115,6 +116,12 @@ Both files must exist and copys from "from.txt" to "to.txt". Returns true if the
 static bool FileMan::CreateDirectory("NewFolder");
 ```
 Creates a new directory, if it does not exist. Returns true if the folder is created or already exists.
+
+#### Deleting Directories
+```c++
+static bool FileMan::CreateDirectory("DeleteFolder");
+```
+Recursively Deletes everything in the Folder. Return true if the folder does not exist.
 
 ## Classes
 
